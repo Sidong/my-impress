@@ -813,7 +813,7 @@ kbd {
     font-family: monospace;
 }
 #lifeConsistion {
-    text-align: right;
+    text-align: left;
     position: absolute;
     right: 0;
     top: 5%;
