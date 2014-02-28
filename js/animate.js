@@ -1,3 +1,4 @@
+// animation script using animate.css
 $(function() {
 
 	// name
