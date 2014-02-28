@@ -304,7 +304,7 @@ $(document).ready(function() {
 				if (userCell.x == cellNum-1 && userCell.y == cellNum-1) {
 					isGenerated = false;
 					$('#mazeSuccess').fadeIn('slow');
-					setTimeout(function(){$('#mazeSuccess').fadeOut('slow')},5000);
+					setTimeout(function(){$('#mazeSuccess').fadeOut('slow')},3000);
 					setTimeout(init, 6000);
 				}
 			}
