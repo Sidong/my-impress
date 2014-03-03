@@ -223,18 +223,19 @@ kbd {
 }
 #mazeSuccess {
 	font-family: monospace;
-	background: rgba(255,255,255,0.8);
 	text-shadow: 0px 0px 0.5px rgba(100,100,100,0.9);
-	color: rgba(105,191,151,0.7);
-	width: 250px;
-	box-shadow: 0 0 2px 2px rgba(0,0,0,0.5);
-	border-radius: 5px;
-	padding: 10px;
 	position: absolute;
-	top: 20%;
-	left: -27%;
+	color: #f85d5d;
+	top: 40%;
+	left: 25%%;
 	display: none;
-	font-size: 30px;
+	font-size: 1em;
+}
+#radio {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: .6em;
 }
 /* css for the photo-slide */
 #slideContainer {

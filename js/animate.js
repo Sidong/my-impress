@@ -1,6 +1,6 @@
 // animation script using animate.css
 $(function() {
-
+	
 	// name
 	window.addEventListener('impress:stepenter', function() {
 	  $('#name.active h1').addClass('animated flipInY');
@@ -8,7 +8,7 @@ $(function() {
 	window.addEventListener('impress:stepenter', function() {
 	  $('#name.past h1').removeClass('animated flipInY');
 	});
-
+	
 	// hobbies
 	window.addEventListener('impress:stepenter', function() {
 	  $('#hobbies.active h1').addClass('animated rubberBand');

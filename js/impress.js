@@ -112,7 +112,7 @@
     
     // `triggerEvent` builds a custom DOM event with given `eventName` and `detail` data
     // and triggers it on element given as `el`.
-    // 创建事件eventName，并绑定到元素el上
+    // 创建事件eventName，并在元素el上触发事件;
     var triggerEvent = function (el, eventName, detail) {
         var event = document.createEvent("CustomEvent");
         event.initCustomEvent(eventName, true, true, detail);
@@ -120,7 +120,7 @@
     };
     
     // `translate` builds a translate transform string for given data.
-    // 根据t.x t.y t.z 返回translate3d(t.x px, t.y px, t.z px)
+    // 根据t.x t.y t.z 返回" translate3d(t.x px, t.y px, t.z px) ";
     var translate = function ( t ) {
         return " translate3d(" + t.x + "px," + t.y + "px," + t.z + "px) ";
     };
@@ -128,7 +128,7 @@
     // `rotate` builds a rotate transform string for given data.
     // By default the rotations are in X Y Z order that can be reverted by passing `true`
     // as second parameter.
-    // 根据r.x r.y r.z 返回"rotateX(..) rotateY(..) rotateZ(..)"，revert参数代表是否反转顺序
+    // 根据r.x r.y r.z 返回" rotateX(..) rotateY(..) rotateZ(..)"，revert参数代表是否反转顺序
     var rotate = function ( r, revert ) {
         var rX = " rotateX(" + r.x + "deg) ",
             rY = " rotateY(" + r.y + "deg) ",
