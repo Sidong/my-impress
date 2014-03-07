@@ -86,7 +86,11 @@
 		</div>
 		<div id="game"><span class="brace">{</span><span class="brace2">#</span>Game<span class="brace">}</span></div>
 		<div id="radio">
-			<label><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">DFS</label>
+			<form id="algo" action="" method="get"> 
+				<label><input name="algo" type="radio" value="DFS" checked="checked" />DFS</label> 
+				<label><input name="algo" type="radio" value="Kruskal" />Kruskal</label> 
+				<label><input name="algo" type="radio" value="BT" />BT</label> 
+			</form>
 		</div>
 		<div id="mazeInstruction">
 			<p>Tip:</p>
@@ -155,7 +159,7 @@
 </div>
 
 <div id="hint">
-	<p>Use a spacebar or arrow keys to navigate</p>
+	<p>Use a <span class="brace3">spacebar</span> or <span class="brace3">arrow keys</span> to navigate, use <span class="brace3">ESC</span> to overview.</p>
 </div>
 <script>
 	if ("ontouchstart" in document.documentElement) { 

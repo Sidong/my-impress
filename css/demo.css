@@ -192,6 +192,12 @@ body {
 	vertical-align: middle;
 
 }
+.brace3 {
+	color: rgba(0,0,0,0.78);
+	font-weight: 400;
+	font-style: italic;
+	text-shadow: 0 1px rgba(0,0,0,0.5);
+}
 /* css for the maze */
 #mazeContainer {
 	width: 600px;
@@ -234,7 +240,7 @@ kbd {
 #radio {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 5%;
 	font-size: .6em;
 }
 /* css for the photo-slide */

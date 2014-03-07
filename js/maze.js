@@ -42,6 +42,9 @@ $(document).ready(function() {
 	var directions = {"Northwest":[0,3],"Northeast":[2,3],"Southwest":[0,1],"Southeast":[1,2]};
 	var bt_direction = "Northwest";
 
+	// the radio form;
+	var radio = document.getElementById('algo');
+
 	// define the maze cell class;
 	var MazeCell = {
 		createNew: function(x, y, border, wall, solution, backtrap){
@@ -574,9 +577,17 @@ $(document).ready(function() {
 		if (window.location.hash == "#/myMaze") {
 			if (event.which == 71) { // "g",generate;
 				if (!isGenerated && !isGenerating) {
-					// generate_loop = setInterval(create_maze_BT, 10);
-					// generate_loop = setInterval(create_maze_DFS, 10);
-					generate_loop = setInterval(create_maze_Kruskal, 10);
+					radio = document.getElementById('algo');
+					for (var i = 0; i < radio.length; i++) {
+						if (radio[i].checked) {
+							switch(radio[i].value) {
+								case "DFS": generate_loop = setInterval(create_maze_DFS, 10); break;
+								case "Kruskal": generate_loop = setInterval(create_maze_Kruskal, 10); break;
+								case "BT": generate_loop = setInterval(create_maze_BT, 10); break;
+							}
+							break;
+						}
+					}
 					// generate_loop = setInterval(create_maze_Kruskal2, 10);
 					// create_maze_Kruskal2();
 					isGenerating = true;
