@@ -10,6 +10,8 @@ $(document).ready(function() {
 		}
 	});
 
+	// b=1;
+
 	// chart.js handling script
 	// chart 1;
 	var myChart1 = {};
@@ -41,7 +43,7 @@ $(document).ready(function() {
 				data : [28,68,30,29,96,27,80]
 			}
 		]};
-	myChart2.create = function() {new Chart($(myChart2.id)[0].getContext('2d')).Radar(myChart2.data,{scaleShowLabels : false, pointLabelFontSize : 18});}
+	myChart2.create = function() {new Chart($(myChart2.id)[0].getContext('2d')).Radar(myChart2.data,{scaleShowLabels : false, pointLabelFontSize : 18});};
 	myChart2.clear = function() {$(myChart2.id)[0].getContext('2d').clearRect(0,0,$(myChart2.id)[0].width,$(myChart2.id)[0].height);};
 
 	myChart1.create();
