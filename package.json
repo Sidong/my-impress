@@ -1,0 +1,23 @@
+{
+  "name": "my-impress",
+  "version": "0.1.0",
+  "description": "My Personal Presentation using impress.js",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sidong/my-impress.git"
+  },
+  "keywords": [
+    "impress.js",
+    "presentation"
+  ],
+  "author": "@Sidong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sidong/my-impress/issues"
+  },
+  "homepage": "https://github.com/Sidong/my-impress",
+  "devDependencies": {
+    "grunt": "^0.4.4"
+  }
+}
