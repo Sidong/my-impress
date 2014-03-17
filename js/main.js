@@ -1,10 +1,11 @@
+/* global $: false, impress: false, Chart: false */
 $(document).ready(function() {
 	"use strict";
 
 	// ESC for overview
 	var api = impress();
 	$(document).on('keydown', function(event) {
-		if (event.which == "27") { // 'ESC';
+		if (event.which === "27") { // 'ESC';
 			api.goto("overview1");
 		}
 	});
@@ -15,8 +16,8 @@ $(document).ready(function() {
 	// these variables'values are needed to give;
 	myChart1.id = "#myChart1";
 	myChart1.data = [{value:10,color:"#F7464A"},{value:10,color:"#69bf97"},{value:10,color:"#f9f281"}];
-	myChart1.create = function() {new Chart($(myChart1.id)[0].getContext('2d')).Doughnut(myChart1.data);}
-	myChart1.clear = function() {$(myChart1.id)[0].getContext('2d').clearRect(0,0,$(myChart1.id)[0].width,$(myChart1.id)[0].height);};
+	myChart1.create = function() { new Chart($(myChart1.id)[0].getContext('2d')).Doughnut(myChart1.data); };
+	myChart1.clear = function() { $(myChart1.id)[0].getContext('2d').clearRect(0,0,$(myChart1.id)[0].width,$(myChart1.id)[0].height); };
 
 	// chart 2;
 	var myChart2 = {};

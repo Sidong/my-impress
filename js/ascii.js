@@ -1,5 +1,7 @@
+/* global $: false */
 $(document).ready(function() {
-		
+	"use strict";
+
 	//some variables
 	var r, g, b, gray;
 	var character, line = "";
@@ -39,17 +41,17 @@ $(document).ready(function() {
 		//text for ascii art.
 		//blackish = dense characters like "W", "@"
 		//whitish = light characters like "`", "."
-		if(gray > 250) character = " "; //almost white
-		else if(gray > 230) character = "`";
-		else if(gray > 200) character = ":";
-		else if(gray > 175) character = "*";
-		else if(gray > 150) character = "+";
-		else if(gray > 125) character = "#";
-		else if(gray > 50) character = "W";
-		else character = "@"; //almost black
+		if(gray > 250) { character = " "; } //almost white
+		else if(gray > 230) { character = "`"; }
+		else if(gray > 200) { character = ":"; }
+		else if(gray > 175) { character = "*"; }
+		else if(gray > 150) { character = "+"; }
+		else if(gray > 125) { character = "#"; }
+		else if(gray > 50) { character = "W"; }
+		else { character = "@"; } //almost black
 		
 		//newlines and injection into dom
-		if(i != 0 && (i/4)%W == 0) //if the pointer reaches end of pixel-line
+		if(i !== 0 && (i/4)%W === 0) //if the pointer reaches end of pixel-line
 		{
 			ascii.appendChild(document.createTextNode(line));
 			//newline
@@ -73,7 +75,7 @@ $(document).ready(function() {
 	function loop()
 	{
 		var current_ml = parseFloat(ascii.style.marginLeft);
-		if (current_ml == frame_width*(frames-1)*(-1))
+		if (current_ml === frame_width*(frames-1)*(-1))
 		{
 			ascii.style.marginLeft = 0;
 		} else {
