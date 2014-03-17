@@ -18,7 +18,7 @@
 	// 禁止arguments.caller和arguments.callee的使用
 	"noarg": true,
 	// 依据严格的空白规范检查你的代码
-	"white": true,
+	// "white": true,
 	// 允许在if，for，while里面编写赋值语句
 	"boss": true
 }

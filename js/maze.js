@@ -1,4 +1,7 @@
+/* jshint unused: false, laxbreak: true */
+/* global $: false, console: false, alert: false */
 $(document).ready(function() {
+	"use strict";
 	// canvas;
 	var canvas = $('#maze')[0];
 	var ctx = canvas.getContext('2d');
@@ -36,7 +39,6 @@ $(document).ready(function() {
 	var collections = [];
 	// Kruskal2;
 	var collections2 = {};
-	collections2_g = collections2;
 
 	// the Binary Tree direction, default to Northwest;
 	var directions = {"Northwest":[0,3],"Northeast":[2,3],"Southwest":[0,1],"Southeast":[1,2]};
@@ -105,14 +107,14 @@ $(document).ready(function() {
 				var wall = [1,1,1,1];
 				var x = i;
 				var y = j;
-				if (i == 0) {
+				if (i === 0) {
 					border[3] = 1;
-				} else if (i == cellNum-1) {
+				} else if (i === cellNum-1) {
 					border[1] = 1;
 				}
-				if (j == 0) {
+				if (j === 0) {
 					border[0] = 1;
-				} else if (j == cellNum-1) {
+				} else if (j === cellNum-1) {
 					border[2] = 1;
 				}
 				var aCell = MazeCell.createNew(x,y,border,wall);
@@ -139,20 +141,20 @@ $(document).ready(function() {
 						switch(k)
 						{
 							case 0:
-								x = j*cw, y = i*cw;
-								new_x = x, new_y = y+cw;
+								x = j*cw; y = i*cw;
+								new_x = x; new_y = y+cw;
 								break;
 							case 1:
-								x = j*cw, y = i*cw + cw;
-								new_x = x+cw, new_y = y;
+								x = j*cw; y = i*cw + cw;
+								new_x = x+cw; new_y = y;
 								break;
 							case 2:
-								x = j*cw+cw, y = i*cw+cw;
-								new_x = x, new_y = y-cw;
+								x = j*cw+cw; y = i*cw+cw;
+								new_x = x; new_y = y-cw;
 								break;
 							case 3:
-								x = j*cw+cw, y = i*cw;
-								new_x = x-cw, new_y = y;
+								x = j*cw+cw; y = i*cw;
+								new_x = x-cw; new_y = y;
 								break;
 						}
 						ctx.beginPath();
@@ -187,12 +189,12 @@ $(document).ready(function() {
 			// find the neighbours with unvisited state;
 			find_neighbours(currentCell);
 			// if find one or more;
-			if (neighbours.length != 0)
+			if (neighbours.length !== 0)
 			{
 				// choose one at random;
 				rdNum = Math.floor(Math.random()*neighbours.length);
 				// break the wall between the current and the next position;
-				next_x = neighbours[rdNum].x, next_y = neighbours[rdNum].y;
+				next_x = neighbours[rdNum].x; next_y = neighbours[rdNum].y;
 				if (currentCell.y > next_y) { // west side?
 					maze[currentCell.x][currentCell.y].wall[0] = 0;
 					maze[next_x][next_y].wall[2] = 0;
@@ -207,18 +209,18 @@ $(document).ready(function() {
 					maze[next_x][next_y].wall[1] = 0;
 				}
 				cellStack.push(maze[currentCell.x][currentCell.y]);
-				currentCell.x = next_x, currentCell.y = next_y;
+				currentCell.x = next_x; currentCell.y = next_y;
 				maze[currentCell.x][currentCell.y].visited = true;
 				// if find the out, keep the stack in the solutionStack;
-				if (currentCell.x == cellNum-1 && currentCell.y == cellNum-1) {
+				if (currentCell.x === cellNum-1 && currentCell.y === cellNum-1) {
 					solutionStack = cellStack.slice(0,cellStack.length);
-					solutionStack.push(maze[currentCell.x][currentCell.y])
+					solutionStack.push(maze[currentCell.x][currentCell.y]);
 				}
 				visitedCells++;
 			} else {
-				if (cellStack.length == 0) alert("error");
+				if (cellStack.length === 0) { alert("error"); }
 				tmpCell = cellStack.pop();
-				currentCell.x = tmpCell.x, currentCell.y = tmpCell.y;
+				currentCell.x = tmpCell.x; currentCell.y = tmpCell.y;
 			}
 		} else {
 			isGenerated = true;
@@ -240,15 +242,15 @@ $(document).ready(function() {
 			// go from top to down;
 			rdNum = Math.floor(Math.random()*2);
 			var tmp = directions[bt_direction][rdNum];
-			if ((currentCell.x != 0 && tmp == 3) || (currentCell.x != cellNum-1 && tmp == 1)
-				|| (currentCell.y != 0 && tmp == 0) || (currentCell.y != cellNum-1 && tmp == 2))
+			if ((currentCell.x !== 0 && tmp === 3) || (currentCell.x !== cellNum-1 && tmp === 1)
+					|| (currentCell.y !== 0 && tmp === 0) || (currentCell.y !== cellNum-1 && tmp === 2))
 			{
 				break_wall(currentCell, tmp);
 			} else {
 				rdNum = 1 - rdNum;
 				tmp = directions[bt_direction][rdNum];
-				if ((currentCell.x != 0 && tmp == 3) || (currentCell.x != cellNum-1 && tmp == 1)
-					|| (currentCell.y != 0 && tmp == 0) || (currentCell.y != cellNum-1 && tmp == 2))
+				if ((currentCell.x !== 0 && tmp === 3) || (currentCell.x !== cellNum-1 && tmp === 1)
+					|| (currentCell.y !== 0 && tmp === 0) || (currentCell.y !== cellNum-1 && tmp === 2))
 				{
 					break_wall(currentCell, tmp);
 				}
@@ -258,7 +260,7 @@ $(document).ready(function() {
 			currentCell.y += 1;
 			visitedCells += 1;
 
-			if (currentCell.y == cellNum) {
+			if (currentCell.y === cellNum) {
 				currentCell.y = 0;
 				currentCell.x += 1;
 			}
@@ -289,25 +291,25 @@ $(document).ready(function() {
 			for (var i = 0; i < 4; i ++) {
 				switch(i) {
 					case 0:
-						if (column != 0 && (maze[row][column-1].collected == undefined || maze[row][column-1].collected != maze[row][column].collected)) {choices.push(0);}
+						if (column !== 0 && (maze[row][column-1].collected === undefined || maze[row][column-1].collected !== maze[row][column].collected)) {choices.push(0);}
 						break;
 					case 1:
-						if (row != cellNum-1 && (maze[row+1][column].collected == undefined || maze[row+1][column].collected != maze[row][column].collected)) {choices.push(1);}
+						if (row !== cellNum-1 && (maze[row+1][column].collected === undefined || maze[row+1][column].collected !== maze[row][column].collected)) {choices.push(1);}
 						break;
 					case 2:
-						if (column != cellNum-1 && (maze[row][column+1].collected == undefined || maze[row][column+1].collected != maze[row][column].collected)) {choices.push(2);}
+						if (column !== cellNum-1 && (maze[row][column+1].collected === undefined || maze[row][column+1].collected !== maze[row][column].collected)) {choices.push(2);}
 						break;
 					case 3:
-						if (row != 0 && (maze[row-1][column].collected == undefined || maze[row-1][column].collected != maze[row][column].collected)) {choices.push(3);}
+						if (row !== 0 && (maze[row-1][column].collected === undefined || maze[row-1][column].collected !== maze[row][column].collected)) {choices.push(3);}
 						break;
 				}
 			}
 			// archive it;
-			if (choices.length == 0) {
-				for (var i = 0; i < unarchivedCell.length; i++) {
-					if (unarchivedCell[i].x == row && unarchivedCell[i].y == column) {
-						unarchivedCell.splice(i,1);
-						i = unarchivedCell.length;
+			if (choices.length === 0) {
+				for (var k = 0; k < unarchivedCell.length; k++) {
+					if (unarchivedCell[k].x === row && unarchivedCell[k].y === column) {
+						unarchivedCell.splice(k,1);
+						k = unarchivedCell.length;
 					}
 				}
 			} else {
@@ -325,7 +327,7 @@ $(document).ready(function() {
 				// 归为一组;
 				var selectedCollection = maze[row][column].collected;
 				var neighbourCollection = maze[neighbour_row][neighbour_column].collected;
-				if (selectedCollection == undefined && neighbourCollection == undefined) {
+				if (selectedCollection === undefined && neighbourCollection === undefined) {
 					var tmp = [];
 					var tag = row*10+column;
 					maze[row][column].collected = tag;
@@ -334,30 +336,20 @@ $(document).ready(function() {
 					tmp.push({x:neighbour_row, y:neighbour_column, collected:tag});
 					collections2[tag] = tmp;
 					tmp = null;
-				} else if (selectedCollection == undefined && neighbourCollection != undefined) {
+				} else if (selectedCollection === undefined && neighbourCollection !== undefined) {
 					maze[row][column].collected = neighbourCollection;
 					collections2[neighbourCollection].push({x:row, y:column, collected:neighbourCollection});
-				} else if (selectedCollection != undefined && neighbourCollection == undefined) {
+				} else if (selectedCollection !== undefined && neighbourCollection === undefined) {
 					maze[neighbour_row][neighbour_column].collected = selectedCollection;
 					collections2[selectedCollection].push({x:neighbour_row, y:neighbour_column, collected:selectedCollection});
-				} else if (selectedCollection != undefined && neighbourCollection != undefined) {
-					// console.log("selectedCollection:",selectedCollection);
-					// console.log("neighbourCollection:",neighbourCollection);
-					// console.log("collections2:",collections2);
-					var tmp = collections2[neighbourCollection].slice(0,collections2[neighbourCollection].length);
-					for (var i = 0; i < tmp.length; i++) {
-						maze[tmp[i].x][tmp[i].y].collected = selectedCollection;
-						collections2[selectedCollection].push({x:tmp[i].x, y:tmp[i].y, collected:selectedCollection});
+				} else if (selectedCollection !== undefined && neighbourCollection !== undefined) {
+					var tmp2 = collections2[neighbourCollection].slice(0,collections2[neighbourCollection].length);
+					for (var m = 0; m < tmp2.length; m++) {
+						maze[tmp2[m].x][tmp2[m].y].collected = selectedCollection;
+						collections2[selectedCollection].push({x:tmp2[m].x, y:tmp2[m].y, collected:selectedCollection});
 					}
 					delete collections2[neighbourCollection];
-					tmp = null;
-					// var tmp = collections2[selectedCollection].slice(0,collections2[selectedCollection].length);
-					// for (var i = 0; i < tmp.length; i++) {
-					// 	maze[tmp[i].x][tmp[i].y].collected = neighbourCollection;
-					// 	collections2[neighbourCollection].push({x:tmp[i].x, y:tmp[i].y, collected:neighbourCollection});
-					// }
-					// delete collections2[selectedCollection];
-					// tmp = null;
+					tmp2 = null;
 				}
 				archivedLine.push({ 
 					from: {x:row, y:column},
@@ -383,8 +375,8 @@ $(document).ready(function() {
 			var column = unarchivedCell[selected].y;
 			// randomly find one of its neighbours;
 			var rdNeighbour = Math.floor(Math.random()*4);
-			while ((rdNeighbour == 0 && column == 0 ) || (rdNeighbour == 1 && row == cellNum-1) 
-				|| (rdNeighbour == 2 && column == cellNum-1) || (rdNeighbour == 3 && row == 0))  {
+			while ((rdNeighbour === 0 && column === 0 ) || (rdNeighbour === 1 && row === cellNum-1) 
+				|| (rdNeighbour === 2 && column === cellNum-1) || (rdNeighbour === 3 && row === 0))  {
 				rdNeighbour = Math.floor(Math.random()*4);
 			}
 			// break the walls betweens them;
@@ -399,7 +391,7 @@ $(document).ready(function() {
 
 			// if its neighbour is collected, collect the cell to its neighbour's collection and archive the cell;
 			var isCollected = maze[neighbour_row][neighbour_column].collected;
-			if (isCollected != undefined) {
+			if (isCollected !== undefined) {
 				maze[row][column].collected = isCollected;
 				collections[isCollected].push( {x:row, y:column, collected:isCollected} );
 				unarchivedCell.splice(selected,1);
@@ -415,7 +407,7 @@ $(document).ready(function() {
 				collections.push(tmp);
 				unarchivedCell.splice(selected,1);
 				for(var i = 0; i < unarchivedCell.length; i++) {
-					if (unarchivedCell[i].x == neighbour_row && unarchivedCell[i].y == neighbour_column) {
+					if (unarchivedCell[i].x === neighbour_row && unarchivedCell[i].y === neighbour_column) {
 						unarchivedCell.splice(i,1);
 						i = unarchivedCell.length;
 					}
@@ -424,7 +416,7 @@ $(document).ready(function() {
 			// add to draw lines;
 			archivedLine.push({ 
 				from: {x:row, y:column},
-				to:{x:neighbour_row, y:neighbour_column}
+				to: {x:neighbour_row, y:neighbour_column}
 			});
 			draw_walls();
 			draw_lines();
@@ -437,27 +429,27 @@ $(document).ready(function() {
 				var selectedSet = [];
 				var rdCell;
 				// randomly select a cell, randomly select a neighbour that is not in the same collections, combine them;
-				while (selectedSet.length == 0) {
+				while (selectedSet.length === 0) {
 					rdCell = last[Math.floor(Math.random()*last.length)];
-					for (var i = 0; i < 4; i++) {
-						switch(i) {
+					for (var n = 0; n < 4; n++) {
+						switch(n) {
 							case 0:
-								if (rdCell.y != 0 && maze[rdCell.x][rdCell.y-1].collected != rdCell.collected) { 
+								if (rdCell.y !== 0 && maze[rdCell.x][rdCell.y-1].collected !== rdCell.collected) { 
 									selectedSet.push(0);
 								}
 								break;
 							case 1: 
-								if (rdCell.x != cellNum-1 && maze[rdCell.x+1][rdCell.y].collected != rdCell.collected) { 
+								if (rdCell.x !== cellNum-1 && maze[rdCell.x+1][rdCell.y].collected !== rdCell.collected) { 
 									selectedSet.push(1);
 								}
 								break;
 							case 2: 
-								if (rdCell.y != cellNum-1 && maze[rdCell.x][rdCell.y+1].collected != rdCell.collected) { 
+								if (rdCell.y !== cellNum-1 && maze[rdCell.x][rdCell.y+1].collected !== rdCell.collected) { 
 									selectedSet.push(2);
 								}
 								break;
 							case 3: 
-								if (rdCell.x != 0 && maze[rdCell.x-1][rdCell.y].collected != rdCell.collected) { 
+								if (rdCell.x !== 0 && maze[rdCell.x-1][rdCell.y].collected !== rdCell.collected) { 
 									selectedSet.push(3);
 								}
 								break;
@@ -466,30 +458,30 @@ $(document).ready(function() {
 				}
 
 				var rdSelect = selectedSet[Math.floor(Math.random()*selectedSet.length)];
-				var neighbour_row = rdCell.x, neighbour_column = rdCell.y;
+				var neighbour_row2 = rdCell.x, neighbour_column2 = rdCell.y;
 				switch(rdSelect) {
-					case 0: neighbour_column-=1; break;
-					case 1: neighbour_row+=1; break;
-					case 2: neighbour_column+=1; break;
-					case 3: neighbour_row-=1; break;
+					case 0: neighbour_column2-=1; break;
+					case 1: neighbour_row2+=1; break;
+					case 2: neighbour_column2+=1; break;
+					case 3: neighbour_row2-=1; break;
 				}
 				break_wall({x:rdCell.x, y:rdCell.y}, rdSelect);
 				// add to draw lines;
 				archivedLine.push({ 
 					from: {x:rdCell.x, y:rdCell.y},
-					to:{x:neighbour_row, y:neighbour_column}
+					to:{x:neighbour_row2, y:neighbour_column2}
 				});
 
-				var new_collection = maze[neighbour_row][neighbour_column].collected;
-				for (var i = 0; i < last.length; i++) {
-					collections[new_collection].push({x:last[i].x, y:last[i].y, collected:new_collection});
-					maze[last[i].x][last[i].y].collected = new_collection;
+				var new_collection = maze[neighbour_row2][neighbour_column2].collected;
+				for (var p = 0; p < last.length; p++) {
+					collections[new_collection].push({x:last[p].x, y:last[p].y, collected:new_collection});
+					maze[last[p].x][last[p].y].collected = new_collection;
 				}
 				collections.splice(collections.length-1,1);
 
 				draw_walls();
 				draw_lines();
-			} else if (collections.length == 1) {
+			} else if (collections.length === 1) {
 				isGenerated = true;
 				isGenerating = false;
 				clearInterval(generate_loop);
@@ -527,32 +519,32 @@ $(document).ready(function() {
 		neighbours = [];
 		try {
 			tmpCell = maze[position.x-1][position.y];
-			if(tmpCell.visited == false && tmpCell.visited == false) {
+			if(tmpCell.visited === false && tmpCell.visited === false) {
 				neighbours.push({x:position.x-1, y:position.y});
 			}
 		} catch (error){}
 		try {
 			tmpCell = maze[position.x+1][position.y];
-			if(tmpCell.visited == false && tmpCell.visited == false) {
+			if(tmpCell.visited === false && tmpCell.visited === false) {
 				neighbours.push({x:position.x+1, y:position.y});
 			}
 		} catch (error){}
 		try {
 			tmpCell = maze[position.x][position.y-1];
-			if(tmpCell.visited == false && tmpCell.visited == false) {
+			if(tmpCell.visited === false && tmpCell.visited === false) {
 				neighbours.push({x:position.x, y:position.y-1});
 			}
 		} catch (error){}
 		try {
 			tmpCell = maze[position.x][position.y+1];
-			if(tmpCell.visited == false && tmpCell.visited == false) {
+			if(tmpCell.visited === false && tmpCell.visited === false) {
 				neighbours.push({x:position.x, y:position.y+1});
 			}
 		} catch (error){}
 	}
 	function draw_path() {
 		// draw the solution stack;
-		if (solutionStack.length != 0) {
+		if (solutionStack.length !== 0) {
 			draw_walls();
 			var tmpCell;
 			var tmpSolutionStack = solutionStack.slice(0,solutionStack.length);
@@ -574,8 +566,8 @@ $(document).ready(function() {
 	// keydown listener;
 	$(document).keydown(function(event) {
 		// console.log(event.which);
-		if (window.location.hash == "#/myMaze") {
-			if (event.which == 71) { // "g",generate;
+		if (window.location.hash === "#/myMaze") {
+			if (event.which === 71) { // "g",generate;
 				if (!isGenerated && !isGenerating) {
 					radio = document.getElementById('algo');
 					for (var i = 0; i < radio.length; i++) {
@@ -593,24 +585,24 @@ $(document).ready(function() {
 					isGenerating = true;
 					draw_position();
 				}
-			} else if (event.which == 78) { // "n",new;
-				if (generate_loop != undefined) clearInterval(generate_loop);
+			} else if (event.which === 78) { // "n",new;
+				if (generate_loop !== undefined) { clearInterval(generate_loop); }
 				init();
-			} else if (event.which == 83) { // "s",solution;
+			} else if (event.which === 83) { // "s",solution;
 				if (isGenerated) {
 					draw_path();
 				}
-			} else if (event.which == 72) { // "h",hide;
+			} else if (event.which === 72) { // "h",hide;
 				draw_walls();
 				currentCell.x = 0;
 				currentCell.y = 0;
 				draw_position(userCell);
 				draw_destination();
-			} else if (isGenerated && (event.which == 74 || event.which == 73 || event.which == 76 || event.which == 75)) {
+			} else if (isGenerated && (event.which === 74 || event.which === 73 || event.which === 76 || event.which === 75)) {
 				switch(event.which)
 				{
 					case 74: // j(left);
-						if (maze[userCell.x][userCell.y].wall[0] == 0) {
+						if (maze[userCell.x][userCell.y].wall[0] === 0) {
 							clear_position();
 							userCell.y-=1;
 							draw_walls();
@@ -619,7 +611,7 @@ $(document).ready(function() {
 						}
 						break;
 					case 73: // i(up)
-						if (maze[userCell.x][userCell.y].wall[3] == 0) {
+						if (maze[userCell.x][userCell.y].wall[3] === 0) {
 							clear_position();
 							userCell.x-=1;
 							draw_walls();
@@ -628,7 +620,7 @@ $(document).ready(function() {
 						}
 						break;
 					case 76: // l(right)
-						if (maze[userCell.x][userCell.y].wall[2] == 0) {
+						if (maze[userCell.x][userCell.y].wall[2] === 0) {
 							clear_position();
 							userCell.y+=1;
 							draw_walls();
@@ -637,7 +629,7 @@ $(document).ready(function() {
 						}
 						break;
 					case 75: // k(down)
-						if (maze[userCell.x][userCell.y].wall[1] == 0) {
+						if (maze[userCell.x][userCell.y].wall[1] === 0) {
 							clear_position();
 							userCell.x+=1;
 							draw_walls();
@@ -646,10 +638,10 @@ $(document).ready(function() {
 						}
 						break;
 				}
-				if (userCell.x == cellNum-1 && userCell.y == cellNum-1) {
+				if (userCell.x === cellNum-1 && userCell.y === cellNum-1) {
 					isGenerated = false;
 					$('#mazeSuccess').fadeIn('slow');
-					setTimeout(function(){$('#mazeSuccess').fadeOut('slow')},3000);
+					setTimeout(function() { $('#mazeSuccess').fadeOut('slow'); }, 3000);
 				}
 			}
 		}
