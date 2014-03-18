@@ -99,6 +99,9 @@ module.exports = function(grunt) {
 			options: {
 				livereload: true,
 			},
+			html: {
+				files: ['index.html'],
+			},
 			image: {
 				files: [
 					'<%= imagemin.dynamic.files[0].cwd %>' + '<%= imagemin.dynamic.files[0].src %>'
