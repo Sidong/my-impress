@@ -80,8 +80,25 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		// connect: {
+		// server: {
+		// options: {
+		// port: 9001,
+		// hostname: '0.0.0.0',
+		// base: '.'
+		//      }
+		//    }
+		//  },
+		// 清除文件和目录
+		clean: {
+			build: ['css/prefixer/*.css', 'css/build/*.css', 'js/build/*.js'],
+			release: []
+		},
 		// 观察
 		watch: {
+			options: {
+				livereload: true,
+			},
 			image: {
 				files: [
 					'<%= imagemin.dynamic.files[0].cwd %>' + '<%= imagemin.dynamic.files[0].src %>'
@@ -110,17 +127,17 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// 3. Where we tell Grunt we plan to use this plug-in.
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	// grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	// 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-	grunt.registerTask('default', ['jshint', 'concat:scripts', 'concat:vendor', 'uglify:scripts', 'uglify:vendor', 'autoprefixer', 'cssmin:min']);
-	grunt.registerTask('eye', ['watch']);
+	grunt.registerTask('build', ['clean:build', 'jshint', 'concat', 'uglify', 'autoprefixer', 'cssmin']);
+	grunt.registerTask('default', ['clean:build', 'jshint', 'concat', 'uglify', 'autoprefixer', 'cssmin', 'watch']);
 
 };
