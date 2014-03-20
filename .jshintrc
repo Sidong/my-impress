@@ -23,9 +23,13 @@
 	"boss": true,
 	"globals": {
 		"jQuery": true,
+		"$": true,
+		"impress": true,
+		"Chart": true,
 		"console": true,
 		"module": true,
-		"require": true
+		"require": true,
+		"define": true
 	}
 }
 

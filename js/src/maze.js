@@ -1,7 +1,7 @@
 /* jshint unused: false, laxbreak: true */
-/* global $: false, console: false, alert: false */
-$(document).ready(function() {
+define(['jquery'], function($) {
 	"use strict";
+
 	// canvas;
 	var canvas = $('#maze')[0];
 	var ctx = canvas.getContext('2d');
@@ -218,7 +218,7 @@ $(document).ready(function() {
 				}
 				visitedCells++;
 			} else {
-				if (cellStack.length === 0) { alert("error"); }
+				if (cellStack.length === 0) { window.alert("error"); }
 				tmpCell = cellStack.pop();
 				currentCell.x = tmpCell.x; currentCell.y = tmpCell.y;
 			}
@@ -564,86 +564,93 @@ $(document).ready(function() {
 	}
 
 	// keydown listener;
-	$(document).keydown(function(event) {
-		// console.log(event.which);
-		if (window.location.hash === "#/myMaze") {
-			if (event.which === 71) { // "g",generate;
-				if (!isGenerated && !isGenerating) {
-					radio = document.getElementById('algo');
-					for (var i = 0; i < radio.length; i++) {
-						if (radio[i].checked) {
-							switch(radio[i].value) {
-								case "DFS": generate_loop = setInterval(create_maze_DFS, 10); break;
-								case "Kruskal": generate_loop = setInterval(create_maze_Kruskal, 10); break;
-								case "BT": generate_loop = setInterval(create_maze_BT, 10); break;
+	var begin = function() {
+		$(document).keydown(function(event) {
+			// console.log(event.which);
+			if (window.location.hash === "#/myMaze") {
+				if (event.which === 71) { // "g",generate;
+					if (!isGenerated && !isGenerating) {
+						radio = document.getElementById('algo');
+						for (var i = 0; i < radio.length; i++) {
+							if (radio[i].checked) {
+								switch(radio[i].value) {
+									case "DFS": generate_loop = setInterval(create_maze_DFS, 10); break;
+									case "Kruskal": generate_loop = setInterval(create_maze_Kruskal, 10); break;
+									case "BT": generate_loop = setInterval(create_maze_BT, 10); break;
+								}
+								break;
+							}
+						}
+						// generate_loop = setInterval(create_maze_Kruskal2, 10);
+						// create_maze_Kruskal2();
+						isGenerating = true;
+						draw_position();
+					}
+				} else if (event.which === 78) { // "n",new;
+					if (generate_loop !== undefined) { clearInterval(generate_loop); }
+					init();
+				} else if (event.which === 83) { // "s",solution;
+					if (isGenerated) {
+						draw_path();
+					}
+				} else if (event.which === 72) { // "h",hide;
+					draw_walls();
+					currentCell.x = 0;
+					currentCell.y = 0;
+					draw_position(userCell);
+					draw_destination();
+				} else if (isGenerated && (event.which === 74 || event.which === 73 || event.which === 76 || event.which === 75)) {
+					switch(event.which)
+					{
+						case 74: // j(left);
+							if (maze[userCell.x][userCell.y].wall[0] === 0) {
+								clear_position();
+								userCell.y-=1;
+								draw_walls();
+								draw_destination();
+								draw_position(userCell);
 							}
 							break;
-						}
+						case 73: // i(up)
+							if (maze[userCell.x][userCell.y].wall[3] === 0) {
+								clear_position();
+								userCell.x-=1;
+								draw_walls();
+								draw_destination();
+								draw_position(userCell);
+							}
+							break;
+						case 76: // l(right)
+							if (maze[userCell.x][userCell.y].wall[2] === 0) {
+								clear_position();
+								userCell.y+=1;
+								draw_walls();
+								draw_destination();
+								draw_position(userCell);
+							}
+							break;
+						case 75: // k(down)
+							if (maze[userCell.x][userCell.y].wall[1] === 0) {
+								clear_position();
+								userCell.x+=1;
+								draw_walls();
+								draw_destination();
+								draw_position(userCell);
+							}
+							break;
 					}
-					// generate_loop = setInterval(create_maze_Kruskal2, 10);
-					// create_maze_Kruskal2();
-					isGenerating = true;
-					draw_position();
-				}
-			} else if (event.which === 78) { // "n",new;
-				if (generate_loop !== undefined) { clearInterval(generate_loop); }
-				init();
-			} else if (event.which === 83) { // "s",solution;
-				if (isGenerated) {
-					draw_path();
-				}
-			} else if (event.which === 72) { // "h",hide;
-				draw_walls();
-				currentCell.x = 0;
-				currentCell.y = 0;
-				draw_position(userCell);
-				draw_destination();
-			} else if (isGenerated && (event.which === 74 || event.which === 73 || event.which === 76 || event.which === 75)) {
-				switch(event.which)
-				{
-					case 74: // j(left);
-						if (maze[userCell.x][userCell.y].wall[0] === 0) {
-							clear_position();
-							userCell.y-=1;
-							draw_walls();
-							draw_destination();
-							draw_position(userCell);
-						}
-						break;
-					case 73: // i(up)
-						if (maze[userCell.x][userCell.y].wall[3] === 0) {
-							clear_position();
-							userCell.x-=1;
-							draw_walls();
-							draw_destination();
-							draw_position(userCell);
-						}
-						break;
-					case 76: // l(right)
-						if (maze[userCell.x][userCell.y].wall[2] === 0) {
-							clear_position();
-							userCell.y+=1;
-							draw_walls();
-							draw_destination();
-							draw_position(userCell);
-						}
-						break;
-					case 75: // k(down)
-						if (maze[userCell.x][userCell.y].wall[1] === 0) {
-							clear_position();
-							userCell.x+=1;
-							draw_walls();
-							draw_destination();
-							draw_position(userCell);
-						}
-						break;
-				}
-				if (userCell.x === cellNum-1 && userCell.y === cellNum-1) {
-					isGenerated = false;
-					$('#mazeSuccess').fadeIn('slow');
-					setTimeout(function() { $('#mazeSuccess').fadeOut('slow'); }, 3000);
+					if (userCell.x === cellNum-1 && userCell.y === cellNum-1) {
+						isGenerated = false;
+						$('#mazeSuccess').fadeIn('slow');
+						setTimeout(function() { $('#mazeSuccess').fadeOut('slow'); }, 3000);
+					}
 				}
 			}
-		}
-	});
+		});
+	};
+
+	return {
+		begin: begin
+	};
+
 });

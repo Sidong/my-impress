@@ -1,3 +1,5 @@
+@import url('animate.css');
+
 /* HTML5 reset stylesheet */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -289,12 +291,20 @@ kbd {
 }
 
 /* css for the typing animation */
+/*@-webkit-keyframes typing {from { width: 0% }}*/
+/*@-webkit-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}*/
+/*@-moz-keyframes typing {from { width: 0 }}*/
+/*@-moz-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}*/
+/*@-ms-keyframes typing {from { width: 0 }}*/
+/*@-ms-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}*/
+/*@-ms-keyframes typing {from { width: 0 }}*/
+/*@-ms-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}*/
+/*@-o-keyframes typing {from { width: 0 }}*/
+/*@-o-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}*/
 @-webkit-keyframes typing {from { width: 0% }}
+@keyframes typing {from { width: 0% }}
 @-webkit-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}
-@-ms-keyframes typing {from { width: 0 }}
-@-ms-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}
-@-ms-keyframes typing {from { width: 0 }}
-@-ms-keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}
+@keyframes blink-caret {from, to { border-color: transparent } 50% { border-color: black }}
 #typing1 {
 	position: absolute;
 	right: 0;
@@ -305,9 +315,10 @@ kbd {
 	width: 19ch;
 	white-space: nowrap;
 	overflow: hidden;
-	-webkit-animation: typing 10s steps(19, end) infinite, blink-caret .5s step-end infinite;
-		-ms-animation: typing 10s steps(19, end), blink-caret .5s step-end infinite;
-			animation: typing 10s steps(19, end), blink-caret .5s step-end infinite;
+}
+#typing1.step19 {
+	-webkit-animation: typing 10s steps(19, end), blink-caret .5s step-end infinite;
+	animation: typing 10s steps(19, end), blink-caret .5s step-end infinite;
 }
 #typing2 {
 	position: absolute;
@@ -319,9 +330,10 @@ kbd {
 	width: 22ch;
 	white-space: nowrap;
 	overflow: hidden;
-	-webkit-animation: typing 10s steps(22, end) infinite, blink-caret .5s step-end infinite;
-		-ms-animation: typing 10s steps(22, end), blink-caret .5s step-end infinite;
-			animation: typing 10s steps(22, end), blink-caret .5s step-end infinite;
+}
+#typing2.step22 {
+	-webkit-animation: typing 10s steps(22, end), blink-caret .5s step-end infinite;
+	animation: typing 10s steps(22, end), blink-caret .5s step-end infinite;
 }
 #typing3 {
 	position: absolute;
@@ -333,9 +345,10 @@ kbd {
 	width: 17ch;
 	white-space: nowrap;
 	overflow: hidden;
-	-webkit-animation: typing 10s steps(17, end) infinite, blink-caret .5s step-end infinite;
-		-ms-animation: typing 10s steps(17, end), blink-caret .5s step-end infinite;
-			animation: typing 10s steps(17, end), blink-caret .5s step-end infinite;
+}
+#typing3.step17 {
+	-webkit-animation: typing 10s steps(17, end), blink-caret .5s step-end infinite;
+	animation: typing 10s steps(17, end), blink-caret .5s step-end infinite;
 }
 
 

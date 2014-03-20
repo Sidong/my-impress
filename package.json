@@ -27,6 +27,8 @@
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.6.0",
-    "jshint-stylish": "^0.1.5"
+    "jshint-stylish": "^0.1.5",
+    "grunt-connect": "~0.2.0",
+    "grunt-contrib-requirejs": "~0.4.3"
   }
 }

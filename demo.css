@@ -278,6 +278,7 @@ kbd {
 	margin: 0 auto;
 	overflow: hidden;
 	display: inline-block;
+	background: rgba(0,0,0,0.7);
 }
 #ascii {
 	font-family: monospace;

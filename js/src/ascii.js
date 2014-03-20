@@ -1,5 +1,5 @@
-/* global $: false */
-$(document).ready(function() {
+/* jshint unused: false */
+define(['jquery'], function($) {
 	"use strict";
 
 	//some variables
@@ -70,7 +70,6 @@ $(document).ready(function() {
 
 	ascii.style.marginLeft = "0";
 
-	setInterval(loop, 1000/10);
 
 	function loop()
 	{
@@ -82,4 +81,9 @@ $(document).ready(function() {
 			ascii.style.marginLeft = (current_ml - frame_width) + "px";
 		}
 	}
+
+	// setInterval(loop, 16.7);
+	return {
+		loop: loop
+	};
 });
