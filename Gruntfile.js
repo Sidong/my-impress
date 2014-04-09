@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 		},
 		// 清除文件和目录
 		clean: {
-			build: ['css/prefixer/*.css', 'css/build/*.css', 'js/build/*.js'],
+			build: ['css/prefixer/*.css', 'css/build/*.css', 'js/build/*'],
 			release: []
 		},
 		requirejs: {
@@ -59,13 +59,16 @@ module.exports = function(grunt) {
 					// appDir: "js/",
 					baseUrl: 'js/',
 					mainConfigFile: 'js/config.js',
-					// dir: 'js/build',
 					keepBuildDir: false,
+					// 多个模块
+					// dir: 'js/build',
 					// modules: [
-					// { name: 'main' }
+						// { name: 'main' },
 					// ],
+					// 单个文件
 					name: "main",
 					out: 'js/build/main.js',
+					// optimize: "none", // test
 					optimize: "uglify",
 					// uglify: {
 					// toplevel: true,
@@ -77,6 +80,14 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		// connect: {
+			// server: {
+				// options: {
+					// port: 9001,
+					// base: '.'
+				// }
+			// }
+		// },
 		// 观察
 		watch: {
 			options: {

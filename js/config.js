@@ -7,7 +7,7 @@ require.config({
 		'ascii': 'src/ascii',
 		'maze': 'src/maze',
 		'mychart': 'src/mychart',
-		'animate': 'src/animate'
+		'animate': 'src/animate',
 	},
 	shim: {
 		'Chart': {
